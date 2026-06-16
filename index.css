@@ -1,0 +1,330 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e 0%, #0c0c16 40%, #05050a 100%);
+  color: #f8f4ef;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.scene {
+  position: relative;
+  width: min(90vw, 620px);
+  height: min(90vh, 740px);
+  display: grid;
+  place-items: center;
+}
+
+.envelope {
+  position: relative;
+  width: 340px;
+  height: 240px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #faf4ef 0%, #e8d9cb 100%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+}
+
+.envelope:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 140, 140, 0.35), 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(180deg, #eedfd1 0%, #d8b8a0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 58%, 0 100%);
+  transform-origin: top center;
+  transition: transform 0.7s ease;
+  z-index: 2;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.body {
+  position: absolute;
+  inset: 0;
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.letter {
+  width: 92%;
+  height: 96%;
+  background: #fffdf7;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  transition: transform 0.8s ease;
+  padding: 24px 20px;
+  display: grid;
+  place-items: start;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.envelope.open .letter {
+  transform: translateY(0);
+}
+
+.letter-content {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.letter h1 {
+  margin: 0 0 14px;
+  font-size: 1.4rem;
+  color: #2c1f1a;
+}
+
+.letter p {
+  margin: 0 0 12px;
+  line-height: 1.7;
+  color: #403533;
+}
+
+.flowers {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.flowers.left {
+  left: -50px;
+}
+
+.flowers.right {
+  right: -50px;
+}
+
+.spider-lily {
+  position: relative;
+  width: 108px;
+  height: 240px;
+  opacity: 0;
+  transform: translateX(20px) scale(0.6);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.flowers.show .spider-lily {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.stem {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 8px;
+  height: 172px;
+  background: linear-gradient(180deg, #4a6d34 0%, #213011 100%);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateX(-50%);
+}
+
+.leaf {
+  position: absolute;
+  width: 24px;
+  height: 76px;
+  background: linear-gradient(180deg, #5d8f4c 0%, #2a5a2a 100%);
+  border-radius: 50% 50% 28% 28%;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.leaf-1 {
+  bottom: 34px;
+  left: 20px;
+  transform: rotate(-22deg);
+}
+
+.leaf-2 {
+  bottom: 20px;
+  left: 60px;
+  transform: rotate(24deg);
+}
+
+.pollen {
+  position: absolute;
+  bottom: 156px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #ffd57a 0%, #e7a94e 65%, #b86d3e 100%);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(255, 190, 115, 0.3);
+}
+
+.stamen {
+  position: absolute;
+  bottom: 160px;
+  left: 50%;
+  width: 2px;
+  height: 86px;
+  background: linear-gradient(180deg, rgba(255, 210, 130, 0.95) 0%, rgba(138, 78, 58, 0.95) 100%);
+  border-radius: 999px;
+  transform-origin: bottom center;
+  box-shadow: 0 0 2px rgba(255, 205, 130, 0.5);
+}
+
+.stamen::after {
+  content: "";
+  position: absolute;
+  bottom: 82px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: #f7d19c;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 8px rgba(247, 209, 156, 0.8);
+}
+
+.stamen-1 { transform: translateX(-16px) rotate(-18deg); }
+.stamen-2 { transform: translateX(-8px) rotate(-8deg); }
+.stamen-3 { transform: translateX(0) rotate(0deg); }
+.stamen-4 { transform: translateX(8px) rotate(10deg); }
+.stamen-5 { transform: translateX(16px) rotate(20deg); }
+.stamen-6 { transform: translateX(24px) rotate(34deg); }
+
+.petal {
+  position: absolute;
+  width: 22px;
+  height: 86px;
+  background: radial-gradient(circle at top, #f04645 0%, #ad1221 50%, #610c11 90%);
+  border-radius: 50% 50% 32% 32%;
+  transform-origin: bottom center;
+  box-shadow: inset 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.petal::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 8px;
+  height: 50px;
+  background: linear-gradient(180deg, rgba(255, 123, 123, 0.65), transparent 100%);
+  border-radius: 4px;
+  transform: translateX(-50%);
+}
+
+.petal-1 {
+  bottom: 140px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-18deg) skewX(-10deg);
+}
+
+.petal-2 {
+  bottom: 142px;
+  left: 50%;
+  transform: translateX(-50%) rotate(18deg) skewX(10deg);
+}
+
+.petal-3 {
+  bottom: 142px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-48deg) skewX(-12deg);
+}
+
+.petal-4 {
+  bottom: 142px;
+  left: 50%;
+  transform: translateX(-50%) rotate(48deg) skewX(12deg);
+}
+
+.petal-5 {
+  bottom: 138px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-78deg) skewX(-14deg);
+}
+
+.petal-6 {
+  bottom: 138px;
+  left: 50%;
+  transform: translateX(-50%) rotate(78deg) skewX(14deg);
+}
+
+.nature {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 10px;
+  align-items: end;
+  opacity: 0;
+  transform: translateX(20px) scale(0.6);
+  transition: opacity 1.2s ease 0.3s, transform 1.2s ease 0.3s;
+  margin-top: 12px;
+}
+
+.flowers.show .nature {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.bud {
+  width: 14px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, #fff8ea 0%, #d6c4a9 55%, #9c856f 100%);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.grass {
+  width: 6px;
+  height: 42px;
+  background: linear-gradient(180deg, #7d9f5c 0%, #3f5b32 100%);
+  border-radius: 3px;
+  transform-origin: bottom center;
+}
+
+.grass-1 { transform: rotate(-10deg); }
+.grass-2 { transform: rotate(12deg); }
+
+.flowers.left .spider-lily,
+.flowers.left .nature {
+  transform-origin: left center;
+}
+
+.flowers.right .spider-lily,
+.flowers.right .nature {
+  transform-origin: right center;
+}
+
+@media (max-width: 520px) {
+  .envelope {
+    width: 240px;
+    height: 160px;
+  }
+
+  .flowers.left {
+    left: -28px;
+  }
+
+  .flowers.right {
+    right: -28px;
+  }
+}
